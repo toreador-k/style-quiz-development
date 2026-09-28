@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1eee6">
+  <title>THE STYLE DIAGNOSTIC</title>
+  <style>
+    /* THE STYLE DIAGNOSTIC — all the styling lives here for easy edits. */
+    :root {
+      --paper: #f1eee6;
+      --ink: #1d1d1a;
+      --pink: #fa6f91;
+      --acid: #d5f25a;
+      --blue: #6373ff;
+      --line: rgba(29, 29, 26, .28);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button { color: inherit; font: inherit; }
+    .frame { width: min(1280px, 100%); min-height: 100vh; margin: auto; padding: 22px clamp(18px, 4vw, 58px) 28px; display: flex; flex-direction: column; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--ink); padding-bottom: 13px; font: 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .brand { font-weight: 700; }
+    .signal { display: flex; align-items: center; gap: 8px; }
+    .signal::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #80a500; box-shadow: 0 0 0 3px rgba(128,165,0,.14); }
+    main { flex: 1; display: grid; grid-template-columns: minmax(240px, .78fr) minmax(0, 1.22fr); align-items: center; gap: clamp(30px, 7vw, 105px); padding: clamp(44px, 8vh, 95px) 0; }
+    .side { align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; }
+    .eyebrow, .micro { font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .eyebrow { display: flex; gap: 10px; align-items: center; }
+    .eyebrow span { padding: 5px 7px; background: var(--acid); }
+    h1 { margin: 18px 0 20px; font: clamp(54px, 9vw, 124px)/.82 var(--display); letter-spacing: -.045em; text-transform: uppercase; }
+    h1 em { color: var(--pink); font-style: normal; }
+    .intro { max-width: 360px; font-size: 16px; line-height: 1.5; }
+    .stamp { width: 150px; height: 150px; margin: 42px 0 0 auto; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; text-align: center; transform: rotate(10deg); font: 12px/1.35 var(--mono); text-transform: uppercase; }
+    .stamp b { display: block; font: 50px/.9 var(--display); }
+    .panel { position: relative; min-height: 510px; padding: clamp(24px, 4vw, 48px); border: 1px solid var(--ink); background: rgba(255,255,255,.2); box-shadow: 10px 10px 0 var(--ink); }
+    .panel::before { content: "SD—001"; position: absolute; top: -12px; right: 20px; padding: 4px 8px; background: var(--blue); color: white; font: 10px var(--mono); letter-spacing: .1em; }
+    .screen { min-height: 416px; display: flex; flex-direction: column; }
+    .topline { display: flex; justify-content: space-between; gap: 12px; align-items: center; font: 11px var(--mono); text-transform: uppercase; }
+    .progress-track { height: 5px; margin: 15px 0 30px; background: #d8d4ca; }
+    .progress-fill { width: 0; height: 100%; background: var(--pink); transition: width .25s ease; }
+    .question { margin: 0 0 25px; max-width: 650px; font: clamp(27px, 3.7vw, 47px)/.98 var(--display); text-transform: uppercase; letter-spacing: -.02em; }
+    .answers { display: grid; gap: 9px; }
+    .answer { display: flex; align-items: center; gap: 14px; width: 100%; padding: 13px 15px; border: 1px solid var(--ink); background: transparent; text-align: left; cursor: pointer; transition: background .16s, transform .16s; }
+    .answer:hover, .answer:focus-visible { background: var(--acid); transform: translateX(4px); outline: none; }
+    .answer .letter { flex: 0 0 29px; height: 29px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font: 12px var(--mono); }
+    .answer .copy { font-size: 14px; }
+    .footerline { margin-top: auto; padding-top: 28px; display: flex; justify-content: space-between; gap: 16px; align-items: center; font: 10px var(--mono); text-transform: uppercase; color: #66645d; }
+    .start-button, .restart { border: 0; padding: 15px 19px; background: var(--ink); color: var(--paper); font: 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+    .start-button:hover, .restart:hover { background: var(--blue); }
+    .start-screen { justify-content: center; }
+    .start-screen .big-number { margin-bottom: 12px; color: var(--pink); font: 100px/.8 var(--display); }
+    .start-screen .question { max-width: 520px; font-size: clamp(38px, 5vw, 62px); }
+    .start-screen p { max-width: 490px; line-height: 1.55; }
+    .result-screen { gap: 18px; }
+    .result-title { margin: 0; font: clamp(39px, 5vw, 65px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.025em; }
+    .result-title span { color: var(--blue); }
+    .result-copy { max-width: 600px; margin: 0; line-height: 1.5; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 2px; }
+    .result-grid h3 { margin: 0 0 12px; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .score-row { display: grid; grid-template-columns: 105px 1fr 36px; align-items: center; gap: 8px; margin: 9px 0; font: 10px var(--mono); text-transform: uppercase; }
+    .bar { height: 8px; background: #d8d4ca; }
+    .bar i { display: block; height: 100%; width: 0; background: var(--pink); }
+    .score-row:nth-child(3) .bar i { background: var(--blue); }
+    .wardrobe { margin: 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.75; }
+    .wardrobe li::before { content: "+ "; font: 12px var(--mono); color: #789400; }
+    .hybrid-note { display: inline-block; padding: 5px 8px; background: var(--acid); font: 10px var(--mono); text-transform: uppercase; }
+    .result-actions { margin-top: auto; padding-top: 7px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .print-note { font: 10px var(--mono); color: #66645d; }
+    .site-foot { display: flex; justify-content: space-between; padding-top: 13px; border-top: 1px solid var(--ink); font: 10px var(--mono); text-transform: uppercase; }
+    [hidden] { display: none !important; }
+    @media (max-width: 760px) {
+      .frame { padding-top: 15px; }
+      main { grid-template-columns: 1fr; gap: 32px; padding: 42px 0; }
+      .side { display: block; }
+      h1 { max-width: 500px; font-size: clamp(56px, 17vw, 96px); }
+      .intro { margin-bottom: 0; }
+      .stamp { display: none; }
+      .panel { min-height: 490px; box-shadow: 6px 6px 0 var(--ink); }
+      .screen { min-height: 426px; }
+    }
+    @media (max-width: 480px) {
+      .masthead { font-size: 9px; }
+      .panel { padding: 24px 19px; }
+      .question { font-size: 34px; }
+      .result-grid { grid-template-columns: 1fr; gap: 15px; }
+      .result-title { font-size: 43px; }
+      .score-row { grid-template-columns: 95px 1fr 32px; }
+      .panel { min-height: 560px; }
+    }
+    @media print { body { background: white; } .frame { min-height: auto; } .side, .masthead, .site-foot, .result-actions, .panel::before { display: none; } main { display: block; padding: 0; } .panel { border: 0; box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <header class="masthead"><div class="brand">[ SD ] &nbsp; Style research unit</div><div class="signal">System ready / v.01</div></header>
+    <main>
+      <section class="side" aria-label="About the diagnostic">
+        <div>
+          <div class="eyebrow"><span>Field study 001</span> wardrobe / self</div>
+          <h1>The style <em>diagnostic</em></h1>
+          <p class="intro">A small investigation into how you move through the world — and what you might want to wear while doing it.</p>
+        </div>
+        <div class="stamp" aria-hidden="true"><div><b>SD</b>wear your<br>own evidence</div></div>
+      </section>
+      <section class="panel" aria-live="polite">
+        <div id="screen" class="screen start-screen">
+          <div class="big-number">01</div>
+          <div class="micro">The diagnostic / 8 prompts</div>
+          <h2 class="question">Find the shape of your style.</h2>
+          <p>Answer from instinct. There are no right looks here — just clues. At the end, you’ll get a style blend and a few pieces to try.</p>
+          <div class="footerline"><span>Approx. 2 minutes</span><button class="start-button" id="startButton">Begin diagnosis ↗</button></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-foot"><span>THE STYLE DIAGNOSTIC © 2026</span><span>Made for getting dressed</span></footer>
+  </div>
+  <script>
+    // Edit these prompts and score values to change how the quiz works.
+    // Each answer gives points to one or more style families.
+    const styles = {
+      romantic: { label: "Romantic", description: "You notice mood, texture and the little details. Your style feels expressive, soft-edged and personal.", clothes: ["A fluid blouse or fine knit", "A long skirt or relaxed wide-leg trouser", "A tactile bag with a small, personal detail"] },
+      punk: { label: "Punk", description: "You like a look with a point of view. Contrast, attitude and a little disruption make familiar pieces feel yours.", clothes: ["A worn-in leather or denim jacket", "A graphic tee with tailored trousers", "Heavy boots and one piece of metal jewellery"] },
+      minimal: { label: "Minimal", description: "You value clarity and repeatable pieces. Thoughtful proportion and a restrained palette do the talking.", clothes: ["A clean-cut coat or overshirt", "A crisp tee with straight-leg trousers", "A simple leather belt and low-profile shoes"] },
+      utility: { label: "Utility", description: "You want clothes to move with real life. Useful layers, durable fabrics and clever pockets feel like freedom.", clothes: ["A roomy workwear jacket", "A sturdy trouser with useful pockets", "A practical crossbody bag and weather-ready shoes"] },
+      avant: { label: "Avant-garde", description: "You enjoy shape, surprise and ideas made wearable. A familiar outfit gets interesting when its proportions shift.", clothes: ["A sculptural top or oversized blazer", "A dramatic wide-leg or tapered trouser", "An unexpected accessory in a bold shape"] }
+    };
+    const questions = [
+      { text: "Your ideal day off has…", answers: [
+        { text: "A slow café, a bookshop and somewhere beautiful to wander.", points: { romantic: 2, minimal: 1 } },
+        { text: "A gig, a late train and a story worth telling.", points: { punk: 2, avant: 1 } },
+        { text: "A long walk with everything I might need in my bag.", points: { utility: 2, minimal: 1 } },
+        { text: "A new exhibition, then making plans as I go.", points: { avant: 2, romantic: 1 } }
+      ] },
+      { text: "Getting dressed feels best when it is…", answers: [
+        { text: "A little ritual: texture, colour and a finishing touch.", points: { romantic: 2, avant: 1 } },
+        { text: "Quick, considered and easy to repeat.", points: { minimal: 2, utility: 1 } },
+        { text: "A chance to push back or break a small rule.", points: { punk: 2, avant: 1 } },
+        { text: "Ready for whatever the day throws at me.", points: { utility: 2, punk: 1 } }
+      ] },
+      { text: "Which detail catches your eye first?", answers: [
+        { text: "A beautiful fabric that looks good up close.", points: { romantic: 2, minimal: 1 } },
+        { text: "An unexpected cut or unusual proportion.", points: { avant: 2, punk: 1 } },
+        { text: "A clever pocket, fastening or hard-wearing finish.", points: { utility: 2, minimal: 1 } },
+        { text: "A bold graphic, clash or bit of shine.", points: { punk: 2, romantic: 1 } }
+      ] },
+      { text: "Your wardrobe would rather be…", answers: [
+        { text: "A tight edit of things that work together.", points: { minimal: 2, utility: 1 } },
+        { text: "A collection of pieces with memories attached.", points: { romantic: 2, punk: 1 } },
+        { text: "A set of useful layers for changing plans.", points: { utility: 2, minimal: 1 } },
+        { text: "A studio for testing new versions of me.", points: { avant: 2, punk: 1 } }
+      ] },
+      { text: "Pick a place to recharge.", answers: [
+        { text: "A quiet room with soft light and good music.", points: { romantic: 2, minimal: 1 } },
+        { text: "Outside, moving, with no fixed route.", points: { utility: 2, avant: 1 } },
+        { text: "In the middle of friends, noise and possibility.", points: { punk: 2, romantic: 1 } },
+        { text: "Somewhere new that shifts my perspective.", points: { avant: 2, minimal: 1 } }
+      ] },
+      { text: "The compliment you secretly love?", answers: [
+        { text: "You always look completely like yourself.", points: { romantic: 2, punk: 1 } },
+        { text: "You make simple things look so good.", points: { minimal: 2, romantic: 1 } },
+        { text: "I’ve never seen anyone wear that like you do.", points: { avant: 2, punk: 1 } },
+        { text: "You’re ready for absolutely anything.", points: { utility: 2, minimal: 1 } }
+      ] },
+      { text: "Choose a texture to reach for.", answers: [
+        { text: "Soft knit, brushed cotton or something sheer.", points: { romantic: 2, minimal: 1 } },
+        { text: "Denim, leather or a little bit of hardware.", points: { punk: 2, utility: 1 } },
+        { text: "Crisp poplin, smooth wool, clean lines.", points: { minimal: 2, avant: 1 } },
+        { text: "A technical fabric with a satisfying function.", points: { utility: 2, avant: 1 } }
+      ] },
+      { text: "One last thing: your outfit should make you feel…", answers: [
+        { text: "At ease, but quietly put together.", points: { minimal: 2, utility: 1 } },
+        { text: "A little bit cinematic.", points: { romantic: 2, avant: 1 } },
+        { text: "Unbothered by the rules.", points: { punk: 2, avant: 1 } },
+        { text: "Ready to get somewhere and do something.", points: { utility: 2, punk: 1 } }
+      ] }
+    ];
+
+    const screen = document.getElementById("screen");
+    const startButton = document.getElementById("startButton");
+    let questionIndex = 0;
+    let scores = {};
+
+    function resetScores() {
+      scores = {};
+      Object.keys(styles).forEach((key) => { scores[key] = 0; });
+      questionIndex = 0;
+    }
+
+    function beginQuiz() {
+      resetScores();
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const question = questions[questionIndex];
+      const letters = ["A", "B", "C", "D"];
+      const percent = Math.round((questionIndex / questions.length) * 100);
+      screen.className = "screen";
+      screen.innerHTML = `
+        <div class="topline"><span>Prompt ${String(questionIndex + 1).padStart(2, "0")} / ${questions.length}</span><span>Read your instinct</span></div>
+        <div class="progress-track" aria-label="Quiz progress"><div class="progress-fill" style="width: ${percent}%"></div></div>
+        <h2 class="question">${question.text}</h2>
+        <div class="answers">${question.answers.map((answer, index) => `
+          <button class="answer" type="button" data-answer="${index}"><span class="letter">${letters[index]}</span><span class="copy">${answer.text}</span></button>
+        `).join("")}</div>
+        <div class="footerline"><span>Your answers stay on this device</span><span>SD / ${String(questionIndex + 1).padStart(2, "0")}</span></div>`;
+      screen.querySelectorAll(".answer").forEach((button) => {
+        button.addEventListener("click", () => chooseAnswer(Number(button.dataset.answer)));
+      });
+    }
+
+    function chooseAnswer(answerIndex) {
+      const answer = questions[questionIndex].answers[answerIndex];
+      Object.entries(answer.points).forEach(([style, points]) => { scores[style] += points; });
+      questionIndex += 1;
+      if (questionIndex < questions.length) showQuestion();
+      else showResult();
+    }
+
+    function showResult() {
+      const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const highest = ranked[0][1];
+      const total = ranked.reduce((sum, entry) => sum + entry[1], 0);
+      const leaders = ranked.filter((entry) => entry[1] === highest).slice(0, 2);
+      const primary = styles[leaders[0][0]];
+      const secondary = leaders[1] ? styles[leaders[1][0]] : styles[ranked[1][0]];
+      const blend = leaders.map((entry) => styles[entry[0]].label).join(" + ");
+      const percentages = ranked.map(([key, value]) => ({ key, label: styles[key].label, percent: total ? Math.round((value / total) * 100) : 0 }));
+      const recommendations = [...primary.clothes.slice(0, 2), secondary.clothes[0]];
+      screen.className = "screen result-screen";
+      screen.innerHTML = `
+        <div class="topline"><span>Readout / complete</span><span>Style profile 001</span></div>
+        <span class="hybrid-note">Your style blend</span>
+        <h2 class="result-title">${blend.split(" + ").map((name, index) => `${index ? "<span>+</span> " : ""}${name}`).join("")}</h2>
+        <p class="result-copy">${primary.description} ${secondary.description}</p>
+        <div class="result-grid">
+          <section><h3>Style DNA / relative share</h3>${percentages.map((item) => `
+            <div class="score-row"><span>${item.label}</span><span class="bar"><i style="width:${item.percent}%"></i></span><span>${item.percent}%</span></div>
+          `).join("")}</section>
+          <section><h3>Try adding to the wardrobe</h3><ul class="wardrobe">${recommendations.map((item) => `<li>${item}</li>`).join("")}</ul></section>
+        </div>
+        <div class="result-actions"><span class="print-note">A starting point, not a rulebook.</span><button class="restart" id="restartButton" type="button">↺ Start again</button></div>`;
+      document.getElementById("restartButton").addEventListener("click", beginQuiz);
+    }
+
+    startButton.addEventListener("click", beginQuiz);
+  </script>
+</body>
+</html>
