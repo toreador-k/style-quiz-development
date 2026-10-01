@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" role="img" aria-labelledby="title desc">
+  <title id="title">Local editorial product image placeholder</title>
+  <desc id="desc">A graphic fashion illustration placeholder to replace with an approved product photograph.</desc>
+  <rect width="640" height="440" fill="#d6d1c5"/>
+  <path d="M0 330 170 230l128 84 174-160 168 115v171H0Z" fill="#b8b2a6"/>
+  <path d="M320 95 230 135l-54 112 62 27 19-42v123h126V232l19 42 62-27-54-112-90-40Z" fill="#242422"/>
+  <path d="m281 105 39 35 39-35M281 105l39 35 39-35" fill="none" stroke="#fa6f91" stroke-width="5"/>
+  <path d="M320 141v123m-61-62h122" stroke="#d5f25a" stroke-width="3" opacity=".9"/>
+  <circle cx="505" cy="88" r="42" fill="#6373ff"/><text x="505" y="94" text-anchor="middle" fill="#fff" font-family="monospace" font-size="14">IMAGE</text>
+  <text x="28" y="408" fill="#242422" font-family="monospace" font-size="13" letter-spacing="2">LOCAL PLACEHOLDER / REPLACE WITH PRODUCT PHOTO</text>
+</svg>
