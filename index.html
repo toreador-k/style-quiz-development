@@ -76,11 +76,25 @@
     </main>
     <footer class="site-foot"><span>THE STYLE DIAGNOSTIC © 2026</span><span>Local quiz / curated edit V.01</span></footer>
   </div>
-  <script src="products.js"></script>
   <script>
     // These are the eight shared Style DNA dimensions used by quiz and products.
     const DIMENSIONS = ["tailored", "urban", "experimental", "minimal", "dramatic", "utility", "relaxed", "romantic"];
     const DIMENSION_LABELS = { tailored:"Tailored", urban:"Urban", experimental:"Experimental", minimal:"Minimal", dramatic:"Dramatic", utility:"Utility", relaxed:"Relaxed", romantic:"Romantic" };
+
+    // The small manually curated catalogue lives here so this page has no runtime dependencies.
+    // Replace image paths with approved local product photos when you have them.
+    const PRODUCTS = [
+      { brand:"Nightcity", brandKey:"nightcity", name:"Oversized Fireman Buckle Blazer", price:"£95", url:"https://nightcityclothing.com/products/oversized-fireman-clasp-buckle-blazer", image:"assets/product-placeholder.svg", traits:{ tailored:92, urban:82, experimental:66, minimal:48, dramatic:76, utility:58, relaxed:42, romantic:30 } },
+      { brand:"Nightcity", brandKey:"nightcity", name:"Adjustable Waist Hook Pleated Pants", price:"£75", url:"https://nightcityclothing.com/products/adjustable-waist-pleated-pants", image:"assets/product-placeholder.svg", traits:{ tailored:82, urban:78, experimental:65, minimal:60, dramatic:50, utility:63, relaxed:58, romantic:24 } },
+      { brand:"Nightcity", brandKey:"nightcity", name:"Latch Hook Clasp Henley Top", price:"£60", url:"https://nightcityclothing.com/products/ribbed-metal-clasp-hook-henley-long-sleeve-tee", image:"assets/product-placeholder.svg", traits:{ tailored:45, urban:80, experimental:74, minimal:50, dramatic:56, utility:48, relaxed:70, romantic:32 } },
+      { brand:"Nightcity", brandKey:"nightcity", name:"Slate Pleated Pinstripe Trousers", price:"£75", url:"https://nightcityclothing.com/products/overlap-pleated-pinstripe-wide-leg-trousers", image:"assets/product-placeholder.svg", traits:{ tailored:90, urban:77, experimental:58, minimal:72, dramatic:48, utility:42, relaxed:55, romantic:20 } },
+      { brand:"Nightcity", brandKey:"nightcity", name:"Shard Blade-Pin Pinstripe Suit", price:"£185", url:"https://nightcityclothing.com/products/shard-blade-pin-pinstripe-suit", image:"assets/product-placeholder.svg", traits:{ tailored:96, urban:76, experimental:74, minimal:38, dramatic:88, utility:28, relaxed:25, romantic:36 } },
+      { brand:"MUZE", brandKey:"muze", name:"Sulfur-Dyed Chino Cross Wide Trousers", price:"¥77,000", url:"https://muze.tokyo/products/m26s-ccp01-black", image:"assets/product-placeholder.svg", traits:{ tailored:72, urban:88, experimental:75, minimal:56, dramatic:52, utility:83, relaxed:67, romantic:16 } },
+      { brand:"MUZE", brandKey:"muze", name:"Switching Wide Slacks", price:"¥49,500", url:"https://muze.tokyo/products/m26s-ssk01-blk", image:"assets/product-placeholder.svg", traits:{ tailored:84, urban:82, experimental:80, minimal:58, dramatic:65, utility:40, relaxed:62, romantic:18 } },
+      { brand:"MUZE", brandKey:"muze", name:"Rigid Denim Covered Knee Panel Trousers", price:"¥69,300", url:"https://muze.tokyo/products/m26s-sdpt01-blk", image:"assets/product-placeholder.svg", traits:{ tailored:58, urban:87, experimental:83, minimal:34, dramatic:57, utility:80, relaxed:63, romantic:14 } },
+      { brand:"MUZE", brandKey:"muze", name:"Form Follows Function Denim Shorts", price:"¥50,600", url:"https://muze.tokyo/products/m26s-fffp01-indigo", image:"assets/product-placeholder.svg", traits:{ tailored:42, urban:82, experimental:76, minimal:38, dramatic:48, utility:88, relaxed:80, romantic:14 } },
+      { brand:"MUZE", brandKey:"muze", name:"Stand Alone Yin-Yang T-Shirt", price:"¥16,500", url:"https://muze.tokyo/products/muze-black-label-stand-alone-yin-yang-t-sh", image:"assets/product-placeholder.svg", traits:{ tailored:18, urban:75, experimental:82, minimal:43, dramatic:70, utility:28, relaxed:82, romantic:25 } }
+    ];
 
     // Questions are about behaviour. Each answer gives hidden points to a few dimensions.
     const questions = [
